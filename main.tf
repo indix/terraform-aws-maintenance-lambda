@@ -3,6 +3,10 @@ provider "aws" {
   max_retries = "${var.max_retries}"
 }
 
+terraform {
+  required_version = ">= 0.8.0"
+}
+
 resource "null_resource" "aws_maintenance_lambda" {
   triggers = {
     package_json = "${base64sha256(file("${path.module}/${var.lambda_source_dir}/package.json"))}"
