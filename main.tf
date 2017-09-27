@@ -1,3 +1,8 @@
+provider "aws" {
+  region = "${var.aws_region}"
+  max_retries = "${var.max_retries}"
+}
+
 resource "null_resource" "aws_maintenance_lambda" {
   triggers = {
     package_json = "${base64sha256(file("${path.module}/${var.lambda_source_dir}/package.json"))}"
