@@ -9,12 +9,12 @@ terraform {
 
 resource "null_resource" "aws_maintenance_lambda" {
   triggers = {
-    package_json        = "${base64sha256(file("${path.module}/${var.lambda_source_dir}/package.json"))}"
+    package_json        = "${base64sha256(file("${var.lambda_source_dir}/package.json"))}"
     force_lambda_update = "${var.force_lambda_update}"
   }
 
   provisioner "local-exec" {
-    command = "bash ${path.module}/scripts/setup.sh ${path.module}/${var.lambda_source_dir} ${var.lambda_prepared_source_dir} ${var.config_json}"
+    command = "bash ${path.module}/scripts/setup.sh ${var.lambda_source_dir} ${var.lambda_prepared_source_dir} ${var.config_json}"
   }
 }
 
