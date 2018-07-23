@@ -11,10 +11,11 @@ pushd "${LAMBDA_DIR}"
 rm -rf aws_maintenance_lambda-*.tgz
 npm pack
 
+mkdir -p "${LAMBDA_PREPARED_DIR}"
 pushd "${LAMBDA_PREPARED_DIR}"
 rm -rf package/
 tar xvf ${LAMBDA_DIR}/aws_maintenance_lambda-*.tgz
 
 pushd package/
-cp "../${CONFIG_FILE}" ./config.json
+cp "${CONFIG_FILE}" ./config.json
 npm install --production
